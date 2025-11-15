@@ -1,0 +1,9 @@
+{
+    "aliases": {
+        "components": "@/components",
+        "ui": "@/components/ui",
+        "lib": "@/lib",
+        "config": "@/config"
+    },
+    "iconLibrary": "lucide"
+}
