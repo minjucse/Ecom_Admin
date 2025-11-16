@@ -47,7 +47,7 @@ const SubCategoriesManagementApi = baseApi.injectEndpoints({
 
         getSubCategoryById: builder.query({
             query: (id) => ({ url: `/sub-categories/${id}`, method: 'GET' }),
-             providesTags: (result, error, id) => [{ type: "SubCategory", id }],
+             providesTags: (_result, _error, id) => [{ type: "SubCategory", id }],
             transformResponse: (response: TResponseRedux<ISubCategory>) => ({
                 data: response.data,
                 meta: response.meta,

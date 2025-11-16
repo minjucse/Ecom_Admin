@@ -15,7 +15,7 @@ export const BannersManagementApi = baseApi.injectEndpoints({
 
         getBannerById: builder.query({
             query: (id) => ({ url: `/banners/${id}`, method: 'GET' }),
-            providesTags: (result, error, id) => [{ type: "Brand", id }],
+            providesTags: (_result, _error, id) => [{ type: "Brand", id }],
             transformResponse: (response: TResponseRedux<IBanner>) => ({
                 data: response.data,
                 meta: response.meta,

@@ -14,7 +14,7 @@ export const shopsManagementApi = baseApi.injectEndpoints({
             providesTags: (result) =>
                 result
                     ? [
-                        ...result.map(({ id }) => ({ type: "Shop" as const, id })),
+                        ...result.map(({ _id }) => ({ type: "Shop" as const, _id })),
                         { type: "Shop", id: "LIST" },
                     ]
                     : [{ type: "Shop", id: "LIST" }],
@@ -26,7 +26,7 @@ export const shopsManagementApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
             transformResponse: (response: IResponse<IShop>) => response.data,
-            providesTags: (result, error, id) => [{ type: "Shop", id }],
+            providesTags: (_result, _error, id) => [{ type: "Shop", id }],
         }),
 
         addShop: builder.mutation({

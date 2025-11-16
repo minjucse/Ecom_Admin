@@ -47,7 +47,7 @@ const ColorManagementApi = baseApi.injectEndpoints({
 
         getColorById: builder.query({
             query: (id) => ({ url: `/colors/${id}`, method: 'GET' }),
-             providesTags: (result, error, id) => [{ type: "Color", id }],
+             providesTags: (_result, _error, id) => [{ type: "Color", id }],
             transformResponse: (response: TResponseRedux<IColor>) => ({
                 data: response.data,
                 meta: response.meta,

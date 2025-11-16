@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { categorySchema, CategoryFormValues } from "@/schemas/products/productsManagement.schema";
 import { useAddCategoryMutation, useGetCategoryByIdQuery, useUpdateCategoryMutation } from "@/redux/features/admin/products/categoryManagement.api";
 import { selectCurrentRole } from '@/redux/features/auth/authSlice';
+
 const Category = () => {
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Category = () => {
       );
 
     } catch (error: any) {
-      toast.error(error?.data?.message || "Something went wrong", { id: toastId });
+      toast.error(error?.data?.message || "Something went wrong", { id: toastId, position: "top-right" });
     }
   };
 

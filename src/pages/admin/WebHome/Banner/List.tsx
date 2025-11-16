@@ -24,7 +24,7 @@ import {
 import { useAppSelector } from '@/redux/hooks';
 import { selectCurrentRole } from '@/redux/features/auth/authSlice';
 import { IBanner } from '@/types/shops.type';
-import config from '@/config';
+//import config from '@/config';
 
 // Table head definition
 const headCells = [
@@ -108,7 +108,7 @@ export default function List() {
   };
 
   const linkStyle = { textDecoration: 'none', color: '#6691B1', fontWeight: 500 };
-  const BASE_URL = config.baseUrl.replace(/\/$/, ''); // remove trailing slash
+  //const BASE_URL = config.baseUrl.replace(/\/$/, ''); // remove trailing slash
 
   return (
     <>
@@ -166,9 +166,9 @@ export default function List() {
                   </TableRow>
                 ) : (
                   recordsAfterPagingAndSorting().map((item, index) => {
-                    const imageUrl = item.imgPath
-                      ? `${BASE_URL}/uploads/${item.imgPath.replace(/^\/uploads\//, '')}`
-                      : '';
+                    // const imageUrl = item.imgPath
+                    //   ? `${BASE_URL}/uploads/${item.imgPath.replace(/^\/uploads\//, '')}`
+                    //   : '';
 
                     return (
                       <TableRow key={item._id}>

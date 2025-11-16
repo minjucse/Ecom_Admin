@@ -1,4 +1,4 @@
-import type{ TQueryParam, TResponseRedux} from '../../../types';
+import type{ TQueryParam} from '../../../types';
 
 import { baseApi } from "@/redux/baseApi";
 
@@ -21,12 +21,7 @@ const userManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-    //   transformResponse: (response: TResponseRedux<TStudent[]>) => {
-    //     return {
-    //       data: response.data,
-    //       meta: response.meta,
-    //     };
-    //   },
+   
     }),
     getAllFaculties: builder.query({
       query: (args) => {
@@ -45,12 +40,7 @@ const userManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-    //   transformResponse: (response: TResponseRedux<TStudent[]>) => {
-    //     return {
-    //       data: response.data,
-    //       meta: response.meta,
-    //     };
-    //   },
+  
     }),
     addStudent: builder.mutation({
       query: (data) => ({

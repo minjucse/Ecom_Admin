@@ -12,10 +12,12 @@ import {
     useUpdateSubCategoryMutation
 } from "@/redux/features/admin/products/subCategoryManagement.api";
 import { useGetDropdownCategoriesQuery } from "@/redux/features/admin/products/categoryManagement.api";
+import { useState } from 'react';
 
 const UpsertSubCategory = () => {
     const { id } = useParams<{ id?: string }>();
     const navigate = useNavigate();
+    const [formKey, setFormKey] = useState(0);
 
     const { data: queryResponse, isLoading, isError } = useGetSubCategoryByIdQuery(id ?? "", {
         skip: !id,
@@ -42,26 +44,39 @@ const UpsertSubCategory = () => {
         isDeleted: Category?.isDeleted ?? false,
     };
 
-    const onSubmit = async (values: SubCategoryFormValues) => {
+    const onSubmit = async (
+        values: SubCategoryFormValues
+    ) => {
         const toastId = toast.loading(Category ? "Updating..." : "Creating...");
 
         try {
             if (Category) {
-                await updateCategory({ id: Category._id, requestData: values }).unwrap();
+                await updateCategory({
+                    id: Category._id,
+                    requestData: values
+                }).unwrap();
+
+                toast.success("Sub Category updated successfully", {
+                    id: toastId,
+                    position: "top-right",
+                });
+
                 navigate("/admin/sub-categories");
             } else {
                 await addCategory(values).unwrap();
+
+                toast.success("Sub Category created successfully", {
+                    id: toastId,
+                    position: "top-right",
+                });
+
+                setFormKey(prev => prev + 1);
             }
 
-            toast.success(
-                Category
-                    ? "Sub Category updated successfully"
-                    : "Sub Category created successfully",
-                { id: toastId, position: "top-right" }
-            );
-
         } catch (error: any) {
-            toast.error(error?.data?.message || "Something went wrong", { id: toastId });
+            toast.error(error?.data?.message || "Something went wrong", {
+                id: toastId,
+            });
         }
     };
 
@@ -84,6 +99,7 @@ const UpsertSubCategory = () => {
             </Box>
 
             <Form
+                key={formKey}
                 onSubmit={onSubmit}
                 defaultValues={defaultValues}
                 resolver={zodResolver(subCategorySchema)}

@@ -47,7 +47,7 @@ const brandsManagementApi = baseApi.injectEndpoints({
 
         getBrandById: builder.query({
             query: (id) => ({ url: `/brands/${id}`, method: 'GET' }),
-             providesTags: (result, error, id) => [{ type: "Brand", id }],
+             providesTags: (_result, _error, id) => [{ type: "Brand", id }],
             transformResponse: (response: TResponseRedux<IBrand>) => ({
                 data: response.data,
                 meta: response.meta,

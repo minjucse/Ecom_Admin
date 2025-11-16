@@ -25,7 +25,7 @@ const Notification = ({ notify, setNotify }: NotificationProps) => {
     const classes = useStyles();
 
     const handleClose = (
-         event: React.SyntheticEvent | Event,
+         _event: React.SyntheticEvent | Event,
         reason?: SnackbarCloseReason
     ) => {
         if (reason === "clickaway") return;

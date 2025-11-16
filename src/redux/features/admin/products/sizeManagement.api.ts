@@ -47,7 +47,7 @@ const SizeManagementApi = baseApi.injectEndpoints({
 
         getSizeById: builder.query({
             query: (id) => ({ url: `/sizes/${id}`, method: 'GET' }),
-             providesTags: (result, error, id) => [{ type: "Size", id }],
+             providesTags: (_result, _error, id) => [{ type: "Size", id }],
             transformResponse: (response: TResponseRedux<ISize>) => ({
                 data: response.data,
                 meta: response.meta,

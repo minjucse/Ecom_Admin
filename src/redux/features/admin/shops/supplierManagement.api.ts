@@ -47,7 +47,7 @@ const suppliersManagementApi = baseApi.injectEndpoints({
 
         getSupplierById: builder.query({
             query: (id) => ({ url: `/suppliers/${id}`, method: 'GET' }),
-             providesTags: (result, error, id) => [{ type: "Supplier", id }],
+             providesTags: (_result, _error, id) => [{ type: "Supplier", id }],
             transformResponse: (response: TResponseRedux<ISupplier>) => ({
                 data: response.data,
                 meta: response.meta,

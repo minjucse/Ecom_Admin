@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 //import Checkbox from "@mui/material/Checkbox";
 //import FormControlLabel from "@mui/material/FormControlLabel";
-import { useState, forwardRef } from "react";
+//import { useState } from "react";
 //import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 //import MuiAlert, { AlertProps } from "@mui/material/Alert";
@@ -43,13 +43,13 @@ const center = {
 
 
 const ForgotPassword = () => {
-    const [open, setOpen] = useState(false);
+    //const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event: any) => {
-        setOpen(true);
+        //setOpen(true);
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+       // const data = new FormData(event.currentTarget);
     };
     return (
         <>

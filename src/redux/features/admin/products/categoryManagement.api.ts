@@ -54,7 +54,7 @@ const CategoriesManagementApi = baseApi.injectEndpoints({
 
         getCategoryById: builder.query({
             query: (id) => ({ url: `/categories/${id}`, method: 'GET' }),
-            providesTags: (result, error, id) => [{ type: "Category", id }],
+            providesTags: (_result, _error, id) => [{ type: "Category", id }],
             transformResponse: (response: TResponseRedux<ICategory>) => ({
                 data: response.data,
                 meta: response.meta,
