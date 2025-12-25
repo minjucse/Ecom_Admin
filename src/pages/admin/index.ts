@@ -34,3 +34,5 @@ export { default as ProductDetail } from './products/productDetail/ProductDetail
 
 export { default as CustomerNew } from './Customers/Customer/Upsert';
 export { default as CustomerList } from './Customers/Customer/List';
+
+export { default as ContactManagement } from './ContactManagement/ContactManagement';

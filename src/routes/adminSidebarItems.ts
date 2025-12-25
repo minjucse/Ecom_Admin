@@ -32,7 +32,8 @@ import {
   ProductDetailEntry,
   ProductDetail,
   CustomerNew,
-  CustomerList
+  CustomerList,
+  ContactManagement
 } from '../pages/admin'
 
 export const adminSidebarItems: IUserPath[] = [
@@ -41,7 +42,7 @@ export const adminSidebarItems: IUserPath[] = [
     path: "dashboard",
     element: AdminDashboard,
     icon: HomeIcon,
-    pageTitle:"Dashboard",
+    pageTitle: "Dashboard",
   },
   {
     name: "Setup",
@@ -51,26 +52,33 @@ export const adminSidebarItems: IUserPath[] = [
         name: "My Shop",
         path: "shop",
         element: MyShop,
-        pageTitle:"My Shop"
+        pageTitle: "My Shop"
       },
       {
-        name: "Home Page",
+        name: "Web Page",
         children: [
           {
             name: "Banner",
-            pageTitle:"Home Page",
+            pageTitle: "Home Page",
             children: [
               { name: "New", path: "banner/new", element: BannerEntry },
               { path: "banner/:id", element: BannerEntry },
               { name: "List", path: "banner/list", element: BannerList },
             ],
+          },
+          {
+            name: "Contact Management",
+            pageTitle: "Contact Management",
+            children: [
+              { name: "Contact Management", path: "contact", element: ContactManagement },
+              
+            ],
           }
-
         ],
       },
       {
         name: "Brand",
-        pageTitle:"Product Brand",
+        pageTitle: "Product Brand",
         children: [
           { name: "New", path: "brand", element: BrandNew },
           { path: "brand/:id", element: BrandNew },
@@ -89,7 +97,7 @@ export const adminSidebarItems: IUserPath[] = [
           // },
           {
             name: "Category",
-             pageTitle:"Product Category",
+            pageTitle: "Product Category",
             children: [
               { name: "New", path: "category", element: CategoryNew },
               { path: "category/:id", element: CategoryNew },
@@ -98,7 +106,7 @@ export const adminSidebarItems: IUserPath[] = [
           },
           {
             name: "Sub Category",
-             pageTitle:"Product Sub Category",
+            pageTitle: "Product Sub Category",
             children: [
               { name: "New", path: "sub-category", element: SubCategoryNew },
               { path: "sub-category/:id", element: SubCategoryNew },
@@ -107,7 +115,7 @@ export const adminSidebarItems: IUserPath[] = [
           },
           {
             name: "Color",
-            pageTitle:"Product Color",
+            pageTitle: "Product Color",
             children: [
               { name: "New", path: "color", element: ColorNew },
               { path: "color/:id", element: ColorNew },
@@ -116,16 +124,16 @@ export const adminSidebarItems: IUserPath[] = [
           },
           {
             name: "Size",
-            pageTitle:"Product Size",
+            pageTitle: "Product Size",
             children: [
               { name: "New", path: "size", element: SizeNew },
-              {  path: "size/:id", element: SizeNew },
+              { path: "size/:id", element: SizeNew },
               { name: "List", path: "sizes", element: SizeList },
             ],
           },
           {
             name: "Detail",
-             pageTitle:"Product Detail",
+            pageTitle: "Product Detail",
             children: [
               { name: "New", path: "productdetail/new", element: ProductDetailEntry },
               { name: "List", path: "productdetail/list", element: ProductDetail },
@@ -135,16 +143,16 @@ export const adminSidebarItems: IUserPath[] = [
       },
       {
         name: "Supplier",
-        pageTitle:"Supplier",
+        pageTitle: "Supplier",
         children: [
           { name: "New", path: "supplier", element: SupplierNew },
-            { path: "supplier/:id", element: SupplierNew },
+          { path: "supplier/:id", element: SupplierNew },
           { name: "List", path: "suppliers", element: SupplierList },
         ],
       },
       {
         name: "Customer",
-         pageTitle:"Customer",
+        pageTitle: "Customer",
         children: [
           { name: "New", path: "customer/new", element: CustomerNew },
           { name: "List", path: "customer/list", element: CustomerList },
@@ -158,7 +166,7 @@ export const adminSidebarItems: IUserPath[] = [
     children: [
       {
         name: "Purchase Order",
-        pageTitle:"Purchase Order",
+        pageTitle: "Purchase Order",
         children: [
           { name: "New", path: "purchase/new" },
           { name: "List", path: "purchase/list" },
@@ -166,7 +174,7 @@ export const adminSidebarItems: IUserPath[] = [
       },
       {
         name: "Purchase Received",
-        pageTitle:"Purchase Received",
+        pageTitle: "Purchase Received",
         children: [
           { name: "New", path: "purchase-receive/new" },
           { name: "List", path: "purchase-receive/list" },
@@ -174,7 +182,7 @@ export const adminSidebarItems: IUserPath[] = [
       },
       {
         name: "Sale",
-         pageTitle:"Sale",
+        pageTitle: "Sale",
         children: [
           { name: "New", path: "pos-sale/new" },
           { name: "List", path: "pos-sale/list" },
@@ -185,7 +193,7 @@ export const adminSidebarItems: IUserPath[] = [
   {
     name: "Reports",
     icon: Assessment,
-    pageTitle:"Reports",
+    pageTitle: "Reports",
     children: [
       { name: "Daily Sales", path: "reports/daily-sales" },
       { name: "Monthly Sales", path: "reports/monthly-sales" },

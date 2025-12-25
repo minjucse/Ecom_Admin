@@ -141,7 +141,7 @@ const SizeList = () => {
               {recordsAfterPagingAndSorting().length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={headCells.length} align="center">
-                    No Categories found
+                    No Sizes found
                   </TableCell>
                 </TableRow>
               ) : (

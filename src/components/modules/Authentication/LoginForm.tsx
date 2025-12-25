@@ -5,8 +5,7 @@ import Grid from '@mui/material/Grid';
 import Controls from "@/components/controls";
 import Form from "@/components/ui/useForm";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import {  useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export function LoginForm({
@@ -14,34 +13,34 @@ export function LoginForm({
     const [remember, setRemember] = useState(false);
     const navigate = useNavigate();
     const [login] = useLoginMutation();
-
+    
     const defaultValues = {
         email: 'minju@myshop.com',
         password: 'Pass@123',
     };
 
-    const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
-        try {
-            const res = await login(data).unwrap();
-
-            if (res.success) {
-                toast.success("Logged in successfully");
-                navigate("/");
-            }
-        } catch (err: any) {
-            console.error(err);
-
-            if (err.data.message === "Password does not match") {
-                toast.error("Invalid credentials");
-            }
+    const handleSubmit = async (data: { email: string; password: string }, reset: () => void) => {
+    try {
+        const res = await login(data).unwrap();
+        if (res.success) {
+            toast.success("Logged in successfully");
+            navigate("/");
+            reset(); // optional: reset form if needed
         }
-    };
+    } catch (err: any) {
+        console.error(err);
+        if (err.data?.message === "Password does not match") {
+            toast.error("Invalid credentials");
+        }
+    }
+};
+
 
     const handleCheckboxChange = () => {
         setRemember((prev) => !prev);
     }; return (
 
-        <Form onSubmit={handleSubmit} defaultValues={defaultValues}>
+        <Form onSubmit={handleSubmit} defaultValues={defaultValues} >
             <Box sx={{ mt: 2 }}>
                 <Grid container spacing={2} justifyContent="center">
                     <Grid size={12}>

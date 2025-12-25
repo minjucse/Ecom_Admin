@@ -12,53 +12,53 @@ import { selectCurrentRole } from '@/redux/features/auth/authSlice';
 
 
 const SizeEntry = () => {
-   const { id } = useParams<{ id?: string }>();
-    const navigate = useNavigate();
-    const currentRole = useAppSelector(selectCurrentRole) ?? 'admin';
-    const { data: queryResponse, isLoading, isError } = useGetSizeByIdQuery(id ?? "", {
-      skip: !id, refetchOnMountOrArgChange: true,
-    });
-    let Size = id && queryResponse?.data ? queryResponse.data : undefined;
-    const [addCategory] = useAddSizeMutation();
-    const [updateCategory] = useUpdateSizeMutation();
-  
-    const defaultValues: SizeFormValues = {
-      name: Size?.name || '',
-      isActive: Size?.isActive ?? true,
-      isDeleted: Size?.isDeleted ?? false,
-    };
-  
-    const onSubmit = async (values: SizeFormValues) => {
-      const toastId = toast.loading(Size ? "Updating..." : "Creating...");
-      try {
-        if (Size) {
-          await updateCategory({ id: Size._id, requestData: values }).unwrap();
-          navigate(`/${currentRole.toLowerCase()}/sizes`);
-        } else {
-          await addCategory(values).unwrap();
-        }
-  
-        toast.success(
-          Size ? "Size updated successfully" : "Size created successfully",
-          { id: toastId, position: "top-right" }
-        );
-  
-      } catch (error: any) {
-        toast.error(error?.data?.message || "Something went wrong", { id: toastId, position: "top-right"});
+  const { id } = useParams<{ id?: string }>();
+  const navigate = useNavigate();
+  const currentRole = useAppSelector(selectCurrentRole) ?? 'admin';
+  const { data: queryResponse, isLoading, isError } = useGetSizeByIdQuery(id ?? "", {
+    skip: !id, refetchOnMountOrArgChange: true,
+  });
+  let Size = id && queryResponse?.data ? queryResponse.data : undefined;
+  const [addCategory] = useAddSizeMutation();
+  const [updateCategory] = useUpdateSizeMutation();
+
+  const defaultValues: SizeFormValues = {
+    name: Size?.name || '',
+    isActive: Size?.isActive ?? true,
+    isDeleted: Size?.isDeleted ?? false,
+  };
+
+  const onSubmit = async (values: SizeFormValues) => {
+    const toastId = toast.loading(Size ? "Updating..." : "Creating...");
+    try {
+      if (Size) {
+        await updateCategory({ id: Size._id, requestData: values }).unwrap();
+        navigate(`/${currentRole.toLowerCase()}/sizes`);
+      } else {
+        await addCategory(values).unwrap();
       }
-    };
-  
-  
-    // --- Loading / Error states ---
-    if (isLoading)
-      return (
-        <Box sx={{ display: "flex", justifyContent: "center", py: 4 }}>
-          <CircularProgress />
-        </Box>
+
+      toast.success(
+        Size ? "Size updated successfully" : "Size created successfully",
+        { id: toastId, position: "top-right" }
       );
-    if (isError) return <Box>Error loading data</Box>;
+
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Something went wrong", { id: toastId, position: "top-right" });
+    }
+  };
+
+
+  // --- Loading / Error states ---
+  if (isLoading)
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", py: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
+  if (isError) return <Box>Error loading data</Box>;
   return (
-      <Paper sx={{ overflow: "hidden", p: 2 }}>
+    <Paper sx={{ overflow: "hidden", p: 2 }}>
       <Box display="flex" alignItems="center" justifyContent="space-between" pr={4}>
         <PageHeader title={Size ? "Edit Size" : "Create a New Size"} subTitle="" />
       </Box>
@@ -70,7 +70,7 @@ const SizeEntry = () => {
               <Grid size={{ xs: 12 }}>
                 <Controls.Input name="name" label="Size Name" type="text" />
               </Grid>
-             
+
               <Grid size={{ xs: 12, md: 6 }} sx={{ ml: "5em", mr: "5em" }}>
                 <Button
                   type="submit"
