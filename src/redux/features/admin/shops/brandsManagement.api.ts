@@ -18,6 +18,12 @@ const brandsManagementApi = baseApi.injectEndpoints({
             providesTags: ["Brand"],
         }),
 
+          getDropdownBrands: builder.query<{ data: { id: string; name: string }[] }, void>({
+            query: () => ({
+                url: '/brands/dropdown',  
+                method: 'GET',           
+            }),
+        }), 
         addBrand: builder.mutation({
             query: (requestData) => ({
                 url: '/brands/create',
@@ -62,6 +68,7 @@ const brandsManagementApi = baseApi.injectEndpoints({
 export const {
     //Brand Start
     useGetAllBrandsQuery,
+    useGetDropdownBrandsQuery,
     useAddBrandMutation,
     useUpdateBrandMutation,
     useDeleteBrandMutation,

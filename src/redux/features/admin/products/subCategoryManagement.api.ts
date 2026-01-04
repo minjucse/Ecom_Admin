@@ -12,10 +12,17 @@ const SubCategoriesManagementApi = baseApi.injectEndpoints({
         getAllSubCategories: builder.query<TResponse<ISubCategory[]>, unknown>({
             query: (params) => ({
                 url: "sub-categories",
-                method: "POST", 
+                method: "POST",
                 data: params,
             }),
             providesTags: ["SubCategory"],
+        }),
+
+        getDropdownSubCategories: builder.query<{ data: { id: string; name: string }[] }, void>({
+            query: () => ({
+                url: '/sub-categories/dropdown',
+                method: 'GET',
+            }),
         }),
 
         addSubCategory: builder.mutation({
@@ -24,7 +31,7 @@ const SubCategoriesManagementApi = baseApi.injectEndpoints({
                 method: 'POST',
                 data: requestData,
             }),
-             invalidatesTags: ["SubCategory"],
+            invalidatesTags: ["SubCategory"],
         }),
 
         updateSubCategory: builder.mutation<ISubCategory, { id: string; requestData: Partial<ISubCategory> }>({
@@ -47,12 +54,12 @@ const SubCategoriesManagementApi = baseApi.injectEndpoints({
 
         getSubCategoryById: builder.query({
             query: (id) => ({ url: `/sub-categories/${id}`, method: 'GET' }),
-             providesTags: (_result, _error, id) => [{ type: "SubCategory", id }],
+            providesTags: (_result, _error, id) => [{ type: "SubCategory", id }],
             transformResponse: (response: TResponseRedux<ISubCategory>) => ({
                 data: response.data,
                 meta: response.meta,
             }),
-            
+
         }),
 
         //SubCategory End
@@ -62,9 +69,10 @@ const SubCategoriesManagementApi = baseApi.injectEndpoints({
 export const {
     //SubCategory Start
     useGetAllSubCategoriesQuery,
+    useLazyGetDropdownSubCategoriesQuery,
     useAddSubCategoryMutation,
     useUpdateSubCategoryMutation,
     useDeleteSubCategoryMutation,
     useGetSubCategoryByIdQuery,
-   
+
 } = SubCategoriesManagementApi;

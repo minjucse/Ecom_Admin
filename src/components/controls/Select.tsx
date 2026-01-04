@@ -8,15 +8,16 @@ import {
 } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
-type Option = { id: string; name: string };
+type Option = { id?: string; _id?: string; name: string };
 
 type SelectProps = {
   name: string;
   label: string;
   options: Option[];
+  disabled?: boolean;
 };
 
-const Select = ({ name, label, options }: SelectProps) => {
+const Select = ({ name, label, options, disabled }: SelectProps) => {
   const {
     control,
     formState: { errors },
@@ -31,11 +32,13 @@ const Select = ({ name, label, options }: SelectProps) => {
           fullWidth
           variant="outlined"
           error={!!errors[name]}
+          disabled={disabled}
         >
           <InputLabel>{label}</InputLabel>
           <MuiSelect
             {...field}
             label={label}
+            disabled={disabled}
             onChange={(event: SelectChangeEvent<string>) =>
               field.onChange(event.target.value)
             }
@@ -43,7 +46,7 @@ const Select = ({ name, label, options }: SelectProps) => {
           >
             <MenuItem value="">None</MenuItem>
             {options.map((item) => (
-              <MenuItem key={item.id} value={item.id}>
+              <MenuItem key={item.id || item._id} value={item.id || item._id}>
                 {item.name}
               </MenuItem>
             ))}

@@ -1,5 +1,6 @@
 import type {
     ICategory,
+    ISubCategory,
     TResponse,
     TResponseRedux,
 } from '@/types';
@@ -20,11 +21,11 @@ const CategoriesManagementApi = baseApi.injectEndpoints({
 
         getDropdownCategories: builder.query<{ data: { id: string; name: string }[] }, void>({
             query: () => ({
-                url: '/categories/dropdown',  
-                method: 'GET',           
+                url: '/categories/dropdown',
+                method: 'GET',
             }),
         }),
-        
+
         addCategory: builder.mutation({
             query: (requestData) => ({
                 url: '/categories/create',
@@ -63,6 +64,61 @@ const CategoriesManagementApi = baseApi.injectEndpoints({
         }),
 
         //Category End
+        //SubCategory Start
+        getAllSubCategories: builder.query<TResponse<ISubCategory[]>, unknown>({
+            query: (params) => ({
+                url: "sub-categories",
+                method: "POST",
+                data: params,
+            }),
+            providesTags: ["SubCategory"],
+        }),
+
+        getDropdownSubCategories: builder.query<{ data: { id: string; name: string }[] }, string | undefined>({
+            query: (categoryId) => ({
+                url: '/sub-categories/dropdown',
+                method: 'GET',
+                params: categoryId ? { categoryId } : undefined,
+            }),
+        }),
+
+        addSubCategory: builder.mutation({
+            query: (requestData) => ({
+                url: '/sub-categories/create',
+                method: 'POST',
+                data: requestData,
+            }),
+            invalidatesTags: ["SubCategory"],
+        }),
+
+        updateSubCategory: builder.mutation<ISubCategory, { id: string; requestData: Partial<ISubCategory> }>({
+            query: ({ id, requestData }) => ({
+                url: `/sub-categories/${id}`,
+                method: 'PATCH',
+                data: requestData,  // ✅ correct
+            }),
+            invalidatesTags: ["SubCategory"],
+        }),
+
+
+        deleteSubCategory: builder.mutation({
+            query: (id) => ({
+                url: `/sub-categories/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["SubCategory"],
+        }),
+
+        getSubCategoryById: builder.query({
+            query: (id) => ({ url: `/sub-categories/${id}`, method: 'GET' }),
+            providesTags: (_result, _error, id) => [{ type: "SubCategory", id }],
+            transformResponse: (response: TResponseRedux<ISubCategory>) => ({
+                data: response.data,
+                meta: response.meta,
+            }),
+
+        }),
+
     }),
 });
 
@@ -75,5 +131,11 @@ export const {
     useDeleteCategoryMutation,
     useGetCategoryByIdQuery,
     //Category End
-
+    //SubCategory Start
+    useGetAllSubCategoriesQuery,
+    useLazyGetDropdownSubCategoriesQuery,
+    useAddSubCategoryMutation,
+    useUpdateSubCategoryMutation,
+    useDeleteSubCategoryMutation,
+    useGetSubCategoryByIdQuery,
 } = CategoriesManagementApi;
