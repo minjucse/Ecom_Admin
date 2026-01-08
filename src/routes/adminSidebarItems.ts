@@ -6,7 +6,9 @@ import PlaylistAddCircleTwoToneIcon from "@mui/icons-material/PlaylistAddCircleT
 
 import { IUserPath } from "@/types";
 
-import { AdminDashboard, ColorList, ColorNew, SizeList, SizeNew } from '../pages/admin';
+import { AdminDashboard, 
+  // ColorList, ColorNew, SizeList, SizeNew
+ } from '../pages/admin';
 import {
   MyShop,
   SupplierNew,

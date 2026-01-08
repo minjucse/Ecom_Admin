@@ -132,8 +132,14 @@ export const productAttributeValueSchema = z.object({
 export const productAttributeFormSchema = z.object({
   attributes: z.array(productAttributeValueSchema).min(1, "At least one attribute is required"),
   barCode: z.string().optional().nullable().transform((v) => v ?? ""),
-  startingInventory: z.number().min(0),
-  minimumStockToNotify: z.number().min(0),
+  startingInventory: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? 0 : Number(val)),
+    z.number().min(0)
+  ),
+  minimumStockToNotify: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? 0 : Number(val)),
+    z.number().min(0)
+  ),
 });
 
 
@@ -144,10 +150,22 @@ export const ProductDetailSchema = z.object({
   name: z.string().trim().min(1, "Product name is required").max(100),
   productCode: z.string().nullable().optional(),
   productSku: z.string().nullable().optional(),
-  price: z.number().min(0),
-  vatRate: z.number().min(0),
-  startingInventory: z.number().min(0),
-  minimumStockToNotify: z.number().min(0),
+  price: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? 0 : Number(val)),
+    z.number().min(0, "Price must be 0 or greater")
+  ),
+  vatRate: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? 0 : Number(val)),
+    z.number().min(0)
+  ),
+  startingInventory: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? 0 : Number(val)),
+    z.number().min(0)
+  ),
+  minimumStockToNotify: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? 0 : Number(val)),
+    z.number().min(0)
+  ),
   categoryId: z.string().min(1, "Category is required"),
   subCategoryId: z.string().min(1, "Sub-category is required"),
   brandId: z.string().min(1, "Brand is required"),
